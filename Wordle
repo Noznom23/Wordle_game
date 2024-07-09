@@ -1,0 +1,63 @@
+import random
+
+def menu():
+    print('Welcome to wordle')
+    print('You will have 6 chances to guess the correct word')
+
+menu()
+
+def random_word(secret_word):
+    word = random.choice(secret_word)
+    return word.upper()
+
+secret_word = ['foods', 'blues', 'green', 'pinks', 'hards', 'heats', 'heart', 'annoy']
+
+print(random_word(secret_word))
+
+# Define a function that check if the guessed word has a length of 5
+
+def check_length():
+    while True:
+        guess_word = input('Enter a word with 5 letters: ').upper()
+        if len(guess_word) == 5:
+            return guess_word
+        else:
+            print('Please enter a word with the correct length.')
+
+# Call the function and print the result
+print(check_length())
+
+
+def word_check(hidden_word, guessed_word):
+    names = ''
+    for i , name in enumerate(guessed_word):
+        if guessed_word[i]== hidden_word[i]:
+            names = names + "🟩"
+        elif guessed_word[i] in hidden_word:
+            names = names + '$'
+        else:
+            names = names + '#'
+    return names
+
+def PlayGame():
+    hidden_word = random_word(secret_word)
+    print(hidden_word)
+    guess_limit = 6
+    i = 0
+    while i < guess_limit:
+        guessed_word = check_length()
+        
+        if guessed_word == hidden_word:
+            print(f"Congratulations!!! You've guessed {guessed_word} correctly")
+            break
+        else:
+            print(word_check(hidden_word, guessed_word))
+            #print('try again')
+            i = i +1 
+    else:
+        print('You failed, try again tomorrow')
+
+PlayGame()
+
+
+
